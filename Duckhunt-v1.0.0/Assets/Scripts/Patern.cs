@@ -7,6 +7,7 @@ public class Patern : MonoBehaviour
     public float speed = .05f;
     public bool direction = true;
 
+
     void Start()
     {
         ResetDirection();
