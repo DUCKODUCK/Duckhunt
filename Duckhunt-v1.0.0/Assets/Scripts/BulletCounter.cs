@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class BulletCounter : MonoBehaviour
-
-   
 {
     public Text bulletText;
     public int bullets;

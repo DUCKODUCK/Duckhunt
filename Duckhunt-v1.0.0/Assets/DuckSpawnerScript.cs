@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class DuckSpawnerScript : MonoBehaviour
 {
-    public GameObject Duck;
+ 
+  
+
+        public GameObject Duck;
     float randX;
     Vector3 whereToSpawn;
     public float spawnrate = 2.5f;
     float nextSpawn = 2f;
     public float currentTime;
     bool spawnBird;
+
+
+ 
     // Start is called before the first frame update
     void Start()
     {
@@ -30,17 +36,33 @@ public class DuckSpawnerScript : MonoBehaviour
             currentTime = 0f;
             spawnBird = true;
         }
-        Debug.Log(Time.time + " " + nextSpawn + " - " + spawnrate);
         if (spawnBird)
         {
 
 
             randX = Random.Range(-8.4f, 8.4f);
             whereToSpawn = new Vector3(randX, transform.position.y);
-            Instantiate(Duck, whereToSpawn, Quaternion.identity);
+            GameObject clone = Instantiate(Duck, whereToSpawn, Quaternion.identity);
+            //clone.MarkAsClone();
             spawnBird = false;
 
 
+
+            if(Input.GetButton("Fire1"))
+            {
+                Destroy(this.gameObject);
+            }
+
+           
         }
+
     }
-}
+
+        void OnMouseDown()
+        {
+            // Destroy game object
+           // Destroy(this.gameObject);
+        }
+
+    }
+
