@@ -16,10 +16,18 @@ public class mouseClick : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            if (hit.collider.GetComponent<PaternBirds>())
+            try
             {
-                Destroy(hit.collider.GetComponent<PaternBirds>().gameObject);
+                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+                if (hit.collider.GetComponent<PaternBirds>())
+                {
+                    FindObjectOfType<poinitScript>().points++;
+                    Destroy(hit.collider.GetComponent<PaternBirds>().gameObject);
+                }
+            }
+            catch (System.NullReferenceException)
+            {
+                Debug.Log("Did not hit something");
             }
         }
     }
