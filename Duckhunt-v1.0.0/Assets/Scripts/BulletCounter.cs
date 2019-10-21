@@ -6,23 +6,23 @@ using UnityEngine.UI;
 public class BulletCounter : MonoBehaviour
 {
     public Text bulletText;
-    public int bullets;
+    mouseClick mouseClick;
     // Start is called before the first frame update
     void Start()
     {
-        bullets = 3;
+        mouseClick = FindObjectOfType<mouseClick>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        bulletText.text = "Bullets:" + bullets;
+        bulletText.text = "Bullets:" + mouseClick.bullets;
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (!(bullets <= 0))
+            if (mouseClick.bullets > 0)
             {
-                bullets--;
+                mouseClick.bullets--;
             }
         }
         

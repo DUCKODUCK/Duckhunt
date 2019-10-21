@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e1d966334b9396d4b91bf72f1d971b63
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Duck: {fileID: 737550169028207575, guid: 2a0b24098e0d9414d94b15c6c111d2e8, type: 3}
+  - roundText: {fileID: 5769577687749652764, guid: 8d3609023472c2347b6ad1e9845d57e6,
+      type: 3}
+  - endScreenText: {fileID: 1569974086252216288, guid: 7bc4cfe0c1457a1409a04d5c3be9886b,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

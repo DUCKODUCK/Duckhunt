@@ -21,6 +21,7 @@ public class DuckSpawnerScript : MonoBehaviour
     public Text roundText;
     public int pointsPerLevel;
     bool endOfLevel;
+    public Text endScreenText;
     
  
     // Start is called before the first frame update
@@ -47,14 +48,15 @@ public class DuckSpawnerScript : MonoBehaviour
             if (spawnCounter < 2 && endOfLevel == false)
             {
                 spawnBird = true;
-                //spawnCounter++;
+                spawnCounter++;
             }
             else
             {
-                //if (numberOfDucks == 0)
-                //{
-                    //NextRound();
-                //}
+              
+                if (numberOfDucks == 0)
+                {
+                    NextRound();
+                }
             }
         }
         if (spawnBird)
@@ -73,23 +75,6 @@ public class DuckSpawnerScript : MonoBehaviour
 
            
         }
-
-        if (spawnCounterToText == levelRounds)
-        {
-            Debug.Log("end of level");
-            if (pointsPerLevel >= 4)
-            {
-                Debug.Log("genoeg points gehaald");
-            }
-            spawnBird = false;
-            endOfLevel = true;
-        }
-        else
-        {
-            endOfLevel = false;
-        }
-        
-
     }
 
     void OnMouseDown()
@@ -105,10 +90,31 @@ public class DuckSpawnerScript : MonoBehaviour
 
         //play animation
 
+        if (spawnCounterToText == levelRounds)
+        {
+            endScreenText.text = "Je bent bij het einde van het level. ";
+            Debug.Log("end of level");
+            if (pointsPerLevel >= 4)
+            {
+                Debug.Log("genoeg points gehaald");
+                endScreenText.text += "Je hebt genoeg Punten Gehaald";
+            }
+            else
+            {
+                endScreenText.text += "Niet behaald";
+            }
+            spawnBird = false;
+            endOfLevel = true;
+        }
+        else
+        {
+            endOfLevel = false;
+            spawnCounterToText++;
+            spawnCounter = 0;
+            roundText.text = spawnCounterToText.ToString();
+            FindObjectOfType<mouseClick>().bullets = 3;
+        }
 
-        spawnCounterToText++;
-        spawnCounter = 0;
-        roundText.text = spawnCounterToText.ToString();
     }
 }
 
