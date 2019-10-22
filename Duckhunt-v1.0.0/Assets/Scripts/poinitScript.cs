@@ -15,12 +15,12 @@ public class poinitScript : MonoBehaviour
     void Start()
     {
         points = 0;
-        pointText.text = "Points:";
+        pointText.text = "Points: 0";
     }
 
     // Update is called once per frame
     void Update()
     {
-        pointText.text = "Points:" + points.ToString();
+        pointText.text = "Points: " + points.ToString();
     }
 }

@@ -8,7 +8,7 @@ public class ExampleScript : MonoBehaviour
 {
     AudioSource audioData;
 
-    void awake()
+    void Start()
     {
         audioData = GetComponent<AudioSource>();
         audioData.Play(0);

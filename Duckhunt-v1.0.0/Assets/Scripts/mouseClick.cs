@@ -14,7 +14,6 @@ public class mouseClick : MonoBehaviour
     void Start()
     {
         bullets = 3;
-        Debug.Log("bullets in mouseklick ivent" + bullets.ToString());
         audioSource = GetComponent<AudioSource>();
    ;
         //this.GetComponent<AudioSource>().clip = laugh;
@@ -24,8 +23,6 @@ public class mouseClick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         if (Input.GetButtonDown("Fire1"))
         {
             audioSource.clip = laugh;
@@ -35,11 +32,12 @@ public class mouseClick : MonoBehaviour
                 if (bullets > 0)
                 {
 
-                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-                if (hit.collider.GetComponent<PaternBirds>())
-                {
-                    FindObjectOfType<poinitScript>().points++;
-                    Destroy(hit.collider.GetComponent<PaternBirds>().gameObject);
+                    RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+                    if (hit.collider.GetComponent<PaternBirds>())
+                    {
+                        FindObjectOfType<poinitScript>().points++;
+                        FindObjectOfType<DuckSpawnerScript>().hittedDucksInRound++;
+                        Destroy(hit.collider.GetComponent<PaternBirds>().gameObject);
                     }
                 }
                 else
