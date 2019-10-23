@@ -27,6 +27,7 @@ public class DuckSpawnerScript : MonoBehaviour
     public Text endScreenText;
 
     public bool gameEnds;
+    public float globalBirdSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -95,8 +96,11 @@ public class DuckSpawnerScript : MonoBehaviour
                 if (timeStart <= 0f)
                 {
                     levelCounter++;
+                    globalBirdSpeed += 0.5f;
+
                     FindObjectOfType<mouseClick>().bullets = 3;
                     roundCounter = 1;
+                    //FindObjectOfType<poinitScript>().SavePoints();
                     timeStart = 5f;
                     timerActive = false;
                     spawnBird = true;

@@ -9,7 +9,7 @@ public class StartGameScript : MonoBehaviour
     public GameObject background;
     public bool gameEnds;
 
-    float ScreenX;
+    public float ScreenX;
 
     // Start is called before the first frame update
     void Start()

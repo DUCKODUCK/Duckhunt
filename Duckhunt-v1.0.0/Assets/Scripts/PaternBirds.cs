@@ -8,12 +8,14 @@ public class PaternBirds : MonoBehaviour
     public bool direction = true;
     public Collider2D duckCollider;
     SpriteRenderer spriteRenderer;
+    public DuckSpawnerScript duckSpawner;
     // Start is called before the first frame update
     void Start()
     {
         ResetDirection();
         duckCollider = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        duckSpawner = FindObjectOfType<DuckSpawnerScript>();
     }
 
 
@@ -21,16 +23,16 @@ public class PaternBirds : MonoBehaviour
     void Update()
     {
 
-
+        speed = duckSpawner.globalBirdSpeed;
         if (direction)
         {
-            transform.position += new Vector3(speed, speed);
+            transform.position += new Vector3(speed, speed)*Time.deltaTime;
             spriteRenderer.flipX = false;
         }
         else
         {
             spriteRenderer.flipX = true;
-            transform.position += new Vector3(speed * -1, speed);
+            transform.position += new Vector3(speed * -1, speed)*Time.deltaTime;
         }
         if(transform.position.x>9)
         {

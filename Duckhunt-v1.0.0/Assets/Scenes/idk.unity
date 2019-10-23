@@ -346,6 +346,7 @@ MonoBehaviour:
   timeStart: 0
   endScreenText: {fileID: 394997409}
   gameEnds: 0
+  globalBirdSpeed: 3
 --- !u!212 &224626120
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1337,6 +1338,7 @@ MonoBehaviour:
   Button: {fileID: 1751833849}
   background: {fileID: 1674253757}
   gameEnds: 0
+  ScreenX: 0
 --- !u!1 &1914226077
 GameObject:
   m_ObjectHideFlags: 0
