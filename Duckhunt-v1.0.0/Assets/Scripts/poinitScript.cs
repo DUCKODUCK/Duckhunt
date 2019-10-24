@@ -3,45 +3,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Newtonsoft.Json;
 using System.IO;
+using Assets.Scripts;
 
 public class poinitScript : MonoBehaviour
 {
 
     public Text pointText;
     public int points;
+    int highScore;
+    SaveGame saveGame;
 
     // Start is called before the first frame update
     void Start()
     {
+        saveGame = new SaveGame();
         points = 0;
-        pointText.text = "Points: 0";
+        saveGame.LoadPoints();
+        highScore = saveGame.HigeScore;
+        
+        pointText.text = string.Format("HighScore: {0} \nPoints: 0", highScore.ToString());
     }
 
     // Update is called once per frame
     void Update()
     {
-        pointText.text = "Points: " + points.ToString();
+        saveGame.HigeScore = this.highScore;
+        pointText.text = string.Format("HighScore: {0} \nPoints: {1}", highScore.ToString(), points.ToString());
+
+        if (points > highScore)
+        {
+            highScore = points;
+            saveGame.HigeScore = highScore;
+        }
     }
 
     public void SavePoints()
     {
-        //zet punten in .json
-        //opslaan in file
-
-        var json = JsonConvert.SerializeObject(points);
-        var path = Path.Combine(Application.dataPath, "points.json");
-        File.WriteAllText(path, json);
+        saveGame.SavePoints();
     }
 
     public void LoadPoints()
     {
-        var path = Path.Combine(Application.dataPath, "points.json");
-        //lees file
-        //umzetten van .json naar int
-        var fileContent = File.ReadAllText(path);
-        var accountsFromFile = JsonConvert.DeserializeObject(fileContent);
-        var reSerializedJson = JsonConvert.SerializeObject(accountsFromFile);
+        saveGame.LoadPoints();
     }
 }

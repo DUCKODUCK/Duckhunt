@@ -10,9 +10,15 @@ public class mouseClick : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip laugh;
 
+    poinitScript pointsScript;
+    DuckSpawnerScript duckSpawnerScript;
+
     // Start is called before the first frame update
     void Start()
     {
+        pointsScript = FindObjectOfType<poinitScript>();
+        duckSpawnerScript = FindObjectOfType<DuckSpawnerScript>();
+
         bullets = 3;
         audioSource = GetComponent<AudioSource>();
    ;
@@ -27,34 +33,29 @@ public class mouseClick : MonoBehaviour
         {
             audioSource.clip = laugh;
             audioSource.Play();
-            try
+
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            if (bullets > 0 && hit.collider != null)
             {
-                if (bullets > 0)
+                if (hit.collider.GetComponent<PaternBirds>() == null)
                 {
-
-                    RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-                    if (hit.collider.GetComponent<PaternBirds>())
-                    {
-                        FindObjectOfType<poinitScript>().points++;
-                        FindObjectOfType<DuckSpawnerScript>().hittedDucksInRound++;
-                        Destroy(hit.collider.GetComponent<PaternBirds>().gameObject);
-                    }
+                    Debug.Log("Miss");
+                    this.gameObject.AddComponent<AudioSource>();
+                    this.GetComponent<AudioSource>().clip = laugh;
+                    this.GetComponent<AudioSource>().Play();
+                    audioSource.clip = laugh;
+                    audioSource.Play();
+                    audioSource.mute = !audioSource.mute;
                 }
-                else
+                else if (hit.collider.GetComponent<PaternBirds>())
                 {
-
+                    Debug.Log("Hitted: Duck");
+                    pointsScript.points++;
+                    duckSpawnerScript.hittedDucksInRound++;
+                    Destroy(hit.collider.GetComponent<PaternBirds>().gameObject);
                 }
             }
-            catch (System.NullReferenceException)
-            {
-                Debug.Log("Did not hit something");
-                this.gameObject.AddComponent<AudioSource>();
-                 this.GetComponent<AudioSource>().clip = laugh;
-                  this.GetComponent<AudioSource>().Play();
-                audioSource.clip = laugh;
-               audioSource.Play();
-                audioSource.mute = !audioSource.mute;
-            }
+            
         }
     }
 }

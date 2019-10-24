@@ -29,9 +29,12 @@ public class DuckSpawnerScript : MonoBehaviour
     public bool gameEnds;
     public float globalBirdSpeed;
 
+    poinitScript poinitScript;
+
     // Start is called before the first frame update
     void Start()
     {
+        poinitScript = FindObjectOfType<poinitScript>();
         gameEnds = true;
         roundCounter = 1;
         levelCounter = 1;
@@ -100,7 +103,7 @@ public class DuckSpawnerScript : MonoBehaviour
 
                     FindObjectOfType<mouseClick>().bullets = 3;
                     roundCounter = 1;
-                    //FindObjectOfType<poinitScript>().SavePoints();
+                    poinitScript.SavePoints();
                     timeStart = 5f;
                     timerActive = false;
                     spawnBird = true;
@@ -111,19 +114,18 @@ public class DuckSpawnerScript : MonoBehaviour
                     LabelUpdate();
                 }
             }
-            else
-            {
-                Debug.Log("Timer is aan | " + timeStart.ToString());
-            }
         }
         else
         {
             if (timerActive)
             {
+                timeStart -= Time.deltaTime;
+                Debug.Log("Timer is aan | " + timeStart.ToString());
                 if (timeStart <= 0f)
                 {
+                    poinitScript.SavePoints();
                     ResetGame();
-                    FindObjectOfType<StartGameScript>().gameEnds = true;
+                    timerActive = false;
                     gameEnds = true;
                 }
             }
@@ -148,6 +150,7 @@ public class DuckSpawnerScript : MonoBehaviour
             else
             {
                 endScreenText.text += string.Format("{0} Niet genoeg punten gehaald, game over!\n\n Je hebt {1}/6 Eenden geraakt", endScreenTextMessage, hittedDucksInRound.ToString());
+                timerActive = true;
                 gameEnds = true;
             }
         }
@@ -177,7 +180,7 @@ public class DuckSpawnerScript : MonoBehaviour
         hittedDucksInRound = 0;
 
         //find out how to show begin screen!!
-        //FindObjectOfType<StartGameScript>()
+        FindObjectOfType<StartGameScript>().ShowBeginScreen();
     }
 }
 

@@ -748,8 +748,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -314, y: 146}
-  m_SizeDelta: {x: 128.77, y: 51.72}
+  m_AnchoredPosition: {x: -223.95, y: 96.59}
+  m_SizeDelta: {x: 368.91, y: 183.49}
   m_Pivot: {x: 0.49999982, y: 0.49999988}
 --- !u!114 &892338296
 MonoBehaviour:
@@ -1337,7 +1337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Button: {fileID: 1751833849}
   background: {fileID: 1674253757}
-  gameEnds: 0
+  duckSpawnerScript: {fileID: 0}
   ScreenX: 0
 --- !u!1 &1914226077
 GameObject:
